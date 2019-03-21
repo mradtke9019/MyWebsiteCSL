@@ -1,0 +1,36 @@
+.mainHead {
+    margin-top: 100px;
+    width: 80%;
+    height: 150px;
+    max-width: 90%;
+    max-height: 60%;
+    letter-spacing: 5px;
+    text-align: right;
+    text-transform: uppercase;
+}
+.headerClass {
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:100px;
+}
+.bodyClass {
+    margin-left:10%;
+}
+
+h1, h2, h3{
+    font-family: 'Times New Roman';
+    text-transform:uppercase;
+}
+
+
+li {
+    display:inline;
+}
+
+a {
+    color:black;
+}
+
+p {
+    font-size:large;
+}
