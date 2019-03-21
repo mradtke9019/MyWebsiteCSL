@@ -4,31 +4,39 @@
     height: 150px;
     max-width: 90%;
     max-height: 60%;
-    letter-spacing: 5px;
+    letter-spacing: 4px;
     text-align: right;
     text-transform: uppercase;
 }
 .headerClass {
     margin-left:auto;
     margin-right:auto;
-    margin-bottom:100px;
+    margin-bottom:200px;
 }
 .bodyClass {
     margin-left:10%;
 }
+.info {
+    margin-bottom:50px;
+}
 
-h1, h2, h3{
-    font-family: 'Times New Roman';
+h1, h2, h3, h4{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    letter-spacing:2px;
     text-transform:uppercase;
 }
 
-
-li {
+.menuList {
     display:inline;
 }
 
-a {
+li {
+    font-size:large;
+}
+
+a, a:visited {
     color:black;
+    text-decoration:underline;
 }
 
 p {

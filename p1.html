@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Program 1 - Matt Radtke</title>
+</head>
+<body>
+<canvas id="myCanvas" width="800" height="600"></canvas>
+<script> "use strict"
+
+window.onload = function() {
+
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+
+//creates a linear gradient
+var gradient = context.createLinearGradient(0,0,800,600);
+gradient.addColorStop(0, "red");
+gradient.addColorStop(1, "yellow");
+
+//fill gradient background
+context.fillStyle = gradient;
+context.fillRect(0,0, 800, 600);
+
+//inner circle fill
+context.strokeStyle = "black";
+context.lineWidth = 30;
+context.arc(400,300,200,0, 2*Math.PI);
+context.fillStyle = "azure";
+context.fill();
+
+//circle outline
+context.strokeStyle = "black";
+context.lineWidth = 30;
+context.arc(400,300,200,0, 2*Math.PI);
+context.stroke();
+
+//colored circle part
+context.lineWidth = 25;
+context.strokeStyle = "darkgoldenrod";
+context.arc(400,300,200,0, 2*Math.PI);
+context.stroke();
+
+//lightning bolt outline
+context.beginPath();
+context.lineWidth = 15;
+context.strokeStyle = "black";
+context.moveTo(470,55);
+context.lineTo(320,255);
+context.lineTo(385,245);
+context.lineTo(310,355);
+context.lineTo(365,345);
+context.lineTo(300,510);
+context.lineTo(475,275);
+context.lineTo(420,285);
+context.lineTo(490,185);
+context.lineTo(420,200);
+context.closePath();
+context.stroke();
+
+//lightning bolt colorized
+context.fillStyle = "crimson";
+context.beginPath();
+context.lineWidth = 1;
+context.moveTo(470,55);
+context.lineTo(320,255);
+context.lineTo(385,245);
+context.lineTo(310,355);
+context.lineTo(365,345);
+context.lineTo(300,510);
+context.lineTo(475,275);
+context.lineTo(420,285);
+context.lineTo(490,185);
+context.lineTo(420,200);
+context.closePath();
+context.fill();
+
+};
+
+</script>
+
+</body>
+</html>

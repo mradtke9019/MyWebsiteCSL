@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>P6 - Matt Radtke</title>
+    
+        <script id = "vs" type = "not-js">
+            attribute vec3 vPosition;
+            attribute vec3 vColor;
+            varying vec3 fColor;
+            uniform mat4 uMVP;
+        
+            void main(void) {
+            gl_Position = uMVP * vec4(vPosition, 1.0);
+                fColor = vColor;
+            }
+            
+        </script>
+    
+        <script id = "fs" type = "not-js">
+            precision highp float;
+            varying vec3 fColor;
+            
+            void main(void) {
+                gl_FragColor = vec4(fColor, 1.0);
+            }
+        
+        </script>
+    </head>
+    
+    <body onload = "start()">
+        <canvas id="myCanvas" width="600" height="400"></canvas><br>
+        <input id="slider1" type="range" min="-100" max="100" /><br>
+        <input id="slider3" type="range" min="0" max="100" />
+        <script src="http://graphics.cs.wisc.edu/JS/twgl-full.min.js"></script>
+        <script src = "./js/p6.js"></script>
+    </body>
+    
+</html>

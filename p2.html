@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Program 2 - Matt Radtke</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="800" height="600"></canvas>
+        
+        <script> 
+            "use strict"
+            window.onload = function() {
+                var canvas = document.getElementById('myCanvas');
+                var context = canvas.getContext('2d');
+                
+                //creating some constants to work with in the code
+                var height = canvas.height;
+                var width = canvas.width;
+                var sunRayScale = 1;
+                var isGrowing = true;
+                var sunX = 0;
+                var moonX = 800;
+                var theta1 = 0;
+                var theta2 = 0;
+                var theta3 = 0;
+                var theta4 = 0;
+                var theta5 = 0;
+                var theta6 = 0;
+                var theta7 = 0;
+                var theta8 = 0;
+                var flowerTheta = 0;
+                var flowerDTheta = 0.0001;
+                var stemTheta = 0;
+                var goPositive = true;
+                var stemGoPositive =true;
+                
+                //draw the entire flower and 
+                //have the bulb rotate with the stem
+                function drawFlower(localColor, localScale) {
+                    context.save();
+                    context.scale(localScale,localScale);
+                    
+                    context.translate(0,80);
+                    context.rotate(stemTheta);
+                    
+                    drawStem(localScale);
+                    context.translate(0,-80 * localScale);
+                    drawBulb(localScale,localColor);
+                    
+                    
+                    
+                     //alternates the flowers rotation
+                    if(stemTheta<= 0.1 && stemGoPositive) 
+                        stemGoPositive = true;
+                     else
+                        stemGoPositive = false;
+                    
+                    if(stemTheta <= -0.1 && !stemGoPositive)
+                        stemGoPositive = true;
+                    if(stemGoPositive)
+                        stemTheta = stemTheta + 0.0001;
+                    if(stemGoPositive == false)
+                        stemTheta = stemTheta - 0.0001;
+                    
+                    
+                    
+                    context.restore();
+                    
+                }
+                
+                function drawStem(localScale) {
+                    context.save();
+                    context.fillStyle = "darkgreen";
+                    context.scale(localScale,localScale);
+                    context.beginPath();
+                    context.moveTo(0,-80);
+                    context.quadraticCurveTo(10,-70,-5,0);
+                    context.lineTo(-10,0);
+                    context.quadraticCurveTo(10,-70,-10,-80);
+                    context.closePath();
+                    context.fill();
+                    
+                    context.restore();
+                    
+                }
+                
+                function drawBulb(localScale,localColor) { 
+                    
+                    context.beginPath();
+                    context.fillStyle = localColor;
+                    
+                    context.save();
+                    context.scale(localScale,localScale);
+                    context.translate(0,20);
+                    context.rotate(flowerTheta);
+                    
+                    context.arc(0,-20,20,0,Math.PI);
+                    
+                    context.lineTo(-20,-28);
+                    context.lineTo(-18,-22);
+                    context.lineTo(-15,-28);
+                    context.lineTo(-13,-22);
+                    context.lineTo(-9,-28);
+                    context.lineTo(-5,-22);
+                    context.lineTo(-3,-28);
+                    context.lineTo(1,-22);
+                    context.lineTo(5,-31);
+                    context.lineTo(8,-22);
+                    context.lineTo(10,-30);
+                    context.lineTo(15,-24);
+                    context.lineTo(18,-31);
+                    
+                    context.restore();
+                    context.closePath();
+                    context.fill();
+
+                    
+                    
+                    //alternates the flowers rotation
+                    if(flowerTheta <= 0.5 && goPositive) 
+                        goPositive = true;
+                     else
+                        goPositive = false;
+                    
+                    if(flowerTheta <= -0.5 && !goPositive)
+                        goPositive = true;
+                    if(goPositive)
+                        flowerTheta = flowerTheta + flowerDTheta;
+                    if(goPositive == false)
+                        flowerTheta = flowerTheta - flowerDTheta;
+                }
+                
+                
+                //a single grass blade with a varying size based on the scale
+                function drawGrass(localColor, localScale) {
+                    context.scale(localScale, localScale);
+                    context.rotate(-Math.PI)
+                    context.strokeStyle = localColor;
+                    context.fillStyle = localColor;
+                    context.beginPath();
+                    context.moveTo(0,2);
+                    context.quadraticCurveTo(13,1,0,40);
+                    context.quadraticCurveTo(-13,1,0,2);
+                    context.closePath();
+                    context.fill();
+                    context.fillRect(-5,1,10,4);
+                }
+                
+                function placeGrass(localColor, localWidth, localHeight) {
+                    context.beginPath();
+                    context.moveTo(0, localHeight);
+                    var i = 0;
+                    //save before we translate around the canvas
+                    context.save();
+                    context.translate(0, localHeight+5);
+                    while(i < 2*localWidth + 10)
+                        {
+                            drawGrass(localColor, 1);
+                            context.translate(i,0);
+                            i = i + 10;
+                        }
+                    context.restore();
+                    
+                }
+                
+                //create a sun and animate the rays around the sun
+                function drawSun(localColor) {
+                    context.save();
+                    context.beginPath();
+                    context.moveTo(0,0);
+                    context.strokeStyle = localColor;
+                    context.fillStyle = localColor;
+                    context.arc(0,0,40,0,2*Math.PI);
+                    context.closePath();
+                    context.fill();
+                    context.restore();
+                    
+                    //draw rays here
+                    context.beginPath();
+                    context.save();
+                    context.rotate(theta1);
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    theta1 = theta1 + 0.005;
+                    context.restore();
+                    
+                    
+                    
+                    context.save();
+                    context.rotate(Math.PI/4);
+                    context.rotate(theta2);
+                    theta2 = theta2 + 0.005;
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    context.restore();
+                    
+                    context.save();
+                    context.rotate(Math.PI/2);
+                    context.rotate(theta3);
+                    theta3 = theta3 + 0.005;
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    context.restore();
+                    
+                    context.save();
+                    context.rotate(0.75 * Math.PI);
+                    context.rotate(theta4);
+                    theta4 = theta4 + 0.005;
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    context.restore();
+                    
+                    context.save();
+                    context.rotate(Math.PI);
+                    context.rotate(theta5);
+                    theta5 = theta5 + 0.005;
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    context.restore();
+                    
+                    context.save();
+                    context.rotate(Math.PI * 1.25);
+                    context.rotate(theta6);
+                    theta6 = theta6 + 0.005;
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    context.restore();
+                    
+                    context.save();
+                    context.rotate(Math.PI * 1.5);
+                    context.rotate(theta7);
+                    theta7 = theta7 + 0.005;
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    context.restore();
+                    
+                    context.save();
+                    context.rotate(Math.PI * 1.75);
+                    context.rotate(theta8);
+                    theta8 = theta8 + 0.005;
+                    context.translate(70,0);
+                    drawSunRay("yellow");
+                    context.restore();
+                    
+                    
+                }
+                
+                function drawMoon() {
+                    context.fillStyle = "azure";
+                    context.beginPath();
+                    context.moveTo(0,0);
+                    context.quadraticCurveTo(80,15,5,100);
+                    context.quadraticCurveTo(35,15,0,0);
+                    context.closePath();
+                    context.fill();
+                    
+                }
+                
+                //sun rays that will grow and shrink
+                function drawSunRay(localColor) {
+                    context.fillStyle = localColor;
+                    context.beginPath();
+                    
+                    if(isGrowing == true)
+                        sunRayScale = sunRayScale + 0.003;
+                    if(isGrowing == false)
+                        sunRayScale = sunRayScale - 0.003;
+                    if(sunRayScale >= 3)
+                        isGrowing = false;
+                    if(sunRayScale <= 1)
+                        isGrowing = true;
+                    
+                    context.scale(sunRayScale,sunRayScale);
+                    context.fillRect(0,0,20,5);
+                    context.closePath();
+                }
+                
+                function draw() {
+                    //reset screen
+                    canvas.width = canvas.width;
+                    var grad = context.createLinearGradient(0,0,width,0);
+                    
+                    //set background based on day or night
+                    if(sunX < 800 && sunX >=0) {
+                        grad.addColorStop(0,"darkblue");
+                        grad.addColorStop(((sunX) % 800) /800, "lightblue");
+                        grad.addColorStop(1, "darkblue");
+                        context.fillStyle = grad;
+                    } else {
+                        grad.addColorStop(0, "lightblue");
+                        grad.addColorStop(((moonX) % 800) /800, "darkblue");
+                        grad.addColorStop(1, "lightblue");
+                        context.fillStyle = grad;
+                    }
+                    
+                    context.beginPath();
+                    context.moveTo(0,0);
+                    context.fillRect(0,0,width, height);
+                    context.closePath();
+                    context.beginPath();
+                    
+                    context.save();
+                    context.translate(sunX,50);
+                    drawSun("yellow");
+                    sunX = sunX +0.5;
+                    if(sunX >=1400)
+                        sunX = -200;
+                    context.restore();
+                    if(moonX >= 1400)
+                        moonX = -200;
+                    context.save();
+                    context.translate(moonX, 50);
+                    drawMoon();
+                    moonX = moonX + 0.5;
+                    context.restore();
+
+                    
+                    //flowers will sway VERY SLOWLY, BUT THEY DO SWAY
+                    context.save();
+                    context.translate(100,500);
+                    drawFlower("red",1);
+                    context.translate(100,0);
+                    drawFlower("blue",1.5);
+                    context.translate(100,20);
+                    drawFlower("purple", 0.8);
+                    context.translate(100,0);
+                    drawFlower("orange",1.1);
+                    context.translate(100,0);
+                    drawFlower("yellow",1.5);
+                    context.translate(100,0);
+                    drawFlower("crimson",0.9);
+                    context.translate(100,0);
+                    drawFlower("aqua",1.1);
+                    context.translate(100,0);
+                    context.restore();
+                    
+                    
+    
+                    
+                    
+                    placeGrass("green", width, height);
+                    
+                    window.requestAnimationFrame(draw);
+                    
+                }
+                
+                window.requestAnimationFrame(draw);
+                
+
+                
+                
+            };
+            
+            
+        </script>
+    </body>
+</html>

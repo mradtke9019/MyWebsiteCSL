@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3D Optical Illuision - Matt Radtke</title>
+    </head>
+    <body>
+        
+        <canvas id="myCanvas" width="800" height="600" style="border:2px solid #000"></canvas>
+
+        <script src = "http://graphics.cs.wisc.edu/JS/twgl-full.min.js"></script>
+        
+        <script> 
+            "use strict";
+            window.onload = function() {
+                var canvas = document.getElementById('myCanvas');
+                var context = canvas.getContext('2d');
+                var m4 = twgl.m4;
+                
+                var angle = 0;
+                var angleAroundCenter1 = 0;
+                var angleAroundCenter2 = Math.PI;
+                var angleAroundCenter3 = Math.PI/2;
+                var angleAroundCenter4 = 3/2*Math.PI;
+                
+                var isGrowing = true;
+                
+                var rectangleScale = 10;
+                var tTranslateFromCenter = m4.translation([100,0,0]);
+
+                function lineToTx(x,y,z,Tx) {
+                    var loc = [x,y,z];
+                    var locTx = m4.transformPoint(Tx,loc);
+                    context.lineTo(locTx[0]+canvas.width/2,-locTx[1]+canvas.height/2);
+                }
+                function moveToTx(x,y,z,Tx) {
+                    var loc = [x,y,z];
+                    var locTx = m4.transformPoint(Tx,loc);
+                    context.moveTo(locTx[0]+canvas.width/2,-locTx[1]+canvas.height/2);
+                }
+                
+                
+                function drawing(Tx, scale, color) {
+                    context.strokeStyle = color;
+                    var xOrigin = 0;
+                    var yOrigin = 0;
+                    var zOrigin = 0;
+                    
+                    //context.lineWidth = 0.5 * scale;
+                    
+                    //middle line of snowflake
+                    moveToTx(xOrigin,yOrigin,zOrigin - 10*scale,Tx);
+                    lineToTx(xOrigin,yOrigin,zOrigin + 10*scale,Tx);
+                    
+                    
+                    moveToTx(xOrigin + 10*scale,yOrigin - 10*scale,zOrigin - 10*scale,Tx);
+                    lineToTx(xOrigin - 10*scale,yOrigin + 10*scale,zOrigin + 10*scale,Tx);
+                    
+                    moveToTx(xOrigin - 10*scale,yOrigin - 10*scale,zOrigin - 10*scale,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin + 10*scale,zOrigin + 10*scale,Tx);
+                    
+                    moveToTx(xOrigin - 10*scale,yOrigin + 10*scale,zOrigin - 10*scale,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin - 10*scale,zOrigin + 10*scale,Tx);
+                    
+                    moveToTx(xOrigin + 10*scale,yOrigin + 10*scale,zOrigin - 10*scale,Tx);
+                    lineToTx(xOrigin - 10*scale,yOrigin - 10*scale,zOrigin + 10*scale,Tx);
+                    
+                    context.stroke();
+                    
+                }
+                
+                function drawSquare(Tx, scale, color) {
+                    context.strokeStyle = color;
+                    var xOrigin = 0;
+                    var yOrigin = 0;
+                    var zOrigin = 0;
+                    
+                    moveToTx(xOrigin,yOrigin,zOrigin,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin,zOrigin,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin+10*scale,zOrigin,Tx);
+                    lineToTx(xOrigin,yOrigin+10*scale,zOrigin,Tx);
+                    moveToTx(xOrigin + 10*scale,yOrigin,zOrigin,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin,zOrigin + 10*scale,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin+10*scale,zOrigin + 10*scale,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin+10*scale,zOrigin,Tx);
+                    moveToTx(xOrigin + 10*scale,yOrigin,zOrigin + 10*scale,Tx);
+                    lineToTx(xOrigin,yOrigin,zOrigin + 10*scale,Tx);
+                    lineToTx(xOrigin,yOrigin+10*scale,zOrigin + 10*scale,Tx);
+                    lineToTx(xOrigin + 10*scale,yOrigin+10*scale,zOrigin + 10*scale,Tx);
+                    moveToTx(xOrigin,yOrigin,zOrigin + 10*scale,Tx);
+                    lineToTx(xOrigin,yOrigin,zOrigin,Tx);
+                    lineToTx(xOrigin,yOrigin+10*scale,zOrigin,Tx);
+                    lineToTx(xOrigin,yOrigin+10*scale,zOrigin + 10*scale,Tx);
+                    
+                    
+                    context.stroke();
+                    context.strokeStyle = "black";
+                }
+                
+                function draw() {
+                    canvas.width = canvas.width;
+                    context.fillStyle = "lightblue";
+                    
+                    context.fillRect(0,0,canvas.width,canvas.height);
+                    var axis = [0,1,0];
+                    angle = angle + 0.005;
+                    angleAroundCenter1 = angleAroundCenter1 +0.01;
+                    angleAroundCenter2 = angleAroundCenter2 +0.01;
+                    angleAroundCenter3 = angleAroundCenter3 +0.01;
+                    angleAroundCenter4 = angleAroundCenter4 +0.01;
+                    
+                    if(!isGrowing && rectangleScale <= 5)
+                        isGrowing = true;
+                    else if(isGrowing && rectangleScale >= 20)
+                        isGrowing = false;
+                    
+                    if(isGrowing)
+                        rectangleScale = rectangleScale + 0.1;
+                    else
+                        rectangleScale = rectangleScale - 0.1;
+                    
+                    var Tmodel = m4.axisRotation(axis,angle);
+                    //translates the cube away from the center of rotation
+                    var Ttranslate1 = m4.multiply(tTranslateFromCenter,m4.multiply(m4.axisRotation([0,1,0],angleAroundCenter1),Tmodel));
+                    var Ttranslate2 = m4.multiply(tTranslateFromCenter,m4.multiply(m4.axisRotation([0,1,0],angleAroundCenter2),Tmodel));
+                    
+                    var Ttranslate3 = m4.multiply(tTranslateFromCenter,m4.multiply(m4.axisRotation([0,1,0],angleAroundCenter3),Tmodel));
+                    var Ttranslate4 = m4.multiply(tTranslateFromCenter,m4.multiply(m4.axisRotation([0,1,0],angleAroundCenter4),Tmodel));
+                    
+                    var eye=[200*Math.cos(1),300,200*Math.sin(1)];
+                    var target = [0,0,0];
+                    var up = [0,1,0];
+                    var Tcamera = m4.inverse(m4.lookAt(eye,target,up));
+                    var Tmodelview1 = m4.multiply(Ttranslate1,Tcamera);
+                    var Tmodelview2 = m4.multiply(Ttranslate2,Tcamera);
+                    var Tmodelview3 = m4.multiply(Ttranslate3,Tcamera);
+                    var Tmodelview4 = m4.multiply(Ttranslate4,Tcamera);
+                    drawSquare(Tmodelview1,rectangleScale,"purple");
+                    context.strokeStyle = "black";
+                    drawSquare(Tmodelview2,rectangleScale,"red");
+                    context.strokeStyle = "black";
+                    drawSquare(Tmodelview3,rectangleScale,"orange");
+                    context.strokeStyle = "black";
+                    drawSquare(Tmodelview4,rectangleScale,"blue");
+                    
+                    //drawSquare(Tmodelview3,rectangleScale,"blue");
+                    //drawing(Tmodelview, 10, "black");
+                    
+                    
+                    
+                    window.requestAnimationFrame(draw);
+                }
+                
+                window.requestAnimationFrame(draw);
+            };
+        </script>
+    </body>
+</html>
