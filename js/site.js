@@ -1,22 +1,12 @@
-// Javascript to run the website. Copyright - Matthew Radtke
+// Javascript to run the website.
 
-$("#menuHome").click(function () {
-    document.getElementById("menuHome").scrollIntoView();
-})
-
-$("#menuAbout").click(function () {
-    alert("Home key was pressed");
-})
-
-$("#menuProjects").click(function () {
-    alert("Home key was pressed");
-})
-
-$("#menuExperience").click(function () {
-    alert("Home key was pressed");
-})
-
-$("#menuContact").click(function () {
-    alert("Home key was pressed");
-
-})
+$('a[href^="#"]').on('click', function (event) {
+    event.preventDefault();
+    var target = $(this.getAttribute('href'));
+    if (target.length) {
+        event.preventDefault();
+        $('html, body').stop().animate({
+            scrollTop: target.offset().top
+        }, 1000);
+    }
+});

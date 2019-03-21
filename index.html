@@ -4,31 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Matthew Radtke's Personal Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="http://graphics.cs.wisc.edu/JS/twgl-full.min.js"></script>
-    <script src="./js/site.js"></script>
+
 
 </head>
 <body>
-    
+
     <div class="container body-content">
         <!--Menu-->
         <div class="mainHead" style="background-position:50% 210px">
-            <h1>Matthew Radtke</h1>
+            <h1 id="home">Matthew Radtke</h1>
             <nav>
                 <ul>
-                    <li class="menuList"><a href="#menuHome" id="menuHome">Home</a></li>
+                    <li class="menuList"><a href="#home" id="menuHome">Home</a></li>
                     <li class="menuList"><a href="#about" id="menuAbout">About</a></li>
                     <li class="menuList"><a href="#projects" id="menuProjects">Projects</a></li>
                     <li class="menuList"><a href="#experience" id="menuExperience">Experience</a></li>
                     <li class="menuList"><a href="#education" id="menuEducation">Education</a></li>
-                    <li class="menuList"><a href="#contact" id="menuContact">Contact</a></li>
+                    <li class="menuList"><a href="#contact" id="menuContact" class="scroll_to">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -39,6 +35,24 @@
                 <p>
                     I am a Senior pursuing a degree in Computer Science at the University of Wisconsin - Madison.  I excel at solving problems in a team and alone. I enjoy pursuing challenges and expanding my knowledge.  I am proficient with Java/C/C#/Web Development and have > 4 years of programming experience.  Furthermore, I pursue my own projects beyond class and tutor friends/peers on programming solutions and projects.
                 </p>
+                <p>
+                    My skills include:
+                    <ul>
+                        <li>Object Oriented Programming</li>
+                        <li>Java, C, C#, Python, .NET Core, Javascript, HTML/CSS, SQL, Web Development</li>
+                        <li>Source Control(Git)</li>
+                        <li>Problem Solving</li>
+                        <li>Debugging</li>
+                        <li>Data Models for Data Science</li>
+                        <li>Able to adapt and learn quickly</li>
+                        <li>Proficient in working in a command prompt (Linux bash)</li>
+                        <li>Can work well alone and in a team</li>
+                    </ul>
+                </p>
+                <p>
+                    My interests include playing the guitar, playing video games, building computers, and writing code. I am a big fan of the Elder Scrolls and Fallout series. I follow and enjoy what DC Comics and Marvel have to offer whenever they release something new.
+                </p>
+
             </div>
         </div>
         <!--Projects-->
@@ -143,15 +157,16 @@
             <div class="bodyClass">
                 <!--High School-->
                 <div class="info">
-                    <h4>New London High School</h4>
+                    <h4><a href="https://www.newlondon.k12.wi.us">New London High School</a></h4>
                     <p>2012-2016</p>
                     <p>GPA: 4.0</p>
                 </div>
                 <!--UW-->
                 <div class="info">
-                    <h4>Uninversity of Wisconsin - Madison</h4>
+                    <h4><a href="https://www.wisc.edu">University of Wisconsin - Madison</a></h4>
                     <p>2016 - May 2020</p>
                     <p>GPA: 3.35</p>
+                    <p>Relevant Coursework:</p>
                     <ul>
                         <li>Java programming</li>
                         <li>Data Structures(Java)</li>
@@ -171,8 +186,9 @@
             <h2>Contact</h2>
             <div class="bodyClass">
                 <h4>Matthew Radtke</h4>
-                <p><i class="fa fa-address-book"></i> <a href="mailto:mradtke2@wisc.edu">mradtke_at_wisc</a></p>
+                <p><a href="mailto:mradtke2@wisc.edu"><i class="fa fa-address-book"></i> mradtke_at_wisc</a> or <a href="mailto:mradtke9019@yahoo.com"><i class="fa fa-address-book"></i> mradtke9019_at_yahoo</a></p>
                 <p><a href="https://www.linkedin.com/in/mradtkewisc">LinkedIn</a></p>
+                <p><a href="https://www.Github.com/mradtke9019">GitHub</a></p>
                 <p><a href="./Resume.pdf">Resume</a></p>
             </div>
         </div>
@@ -183,6 +199,10 @@
         </footer>
     </div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="http://graphics.cs.wisc.edu/JS/twgl-full.min.js"></script>
+    <script src="./js/site.js"></script>
 </body>
 </html>
