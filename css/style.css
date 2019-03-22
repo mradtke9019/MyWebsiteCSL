@@ -1,13 +1,16 @@
 .mainHead {
     margin-top: 300px;
     margin-bottom:300px;
-    width: 80%;
+    padding-top:20px;
+    width: 100%;
     height: 150px;
-    max-width: 90%;
     max-height: 60%;
     letter-spacing: 4px;
     text-align: right;
     text-transform: uppercase;
+    position:sticky;
+    top:0;
+    background-color:white;
 }
 .headerClass {
     margin-left:auto;
