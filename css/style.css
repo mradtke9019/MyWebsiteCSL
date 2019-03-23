@@ -12,12 +12,13 @@
 
 nav {
     letter-spacing: 4px;
-    padding-top:10px;
-    margin-top:10px;
-    margin-bottom:300px;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-bottom: 300px;
+    width: 100%;
     text-align: right;
     text-transform: uppercase;
-    position:sticky;
+    position: sticky;
     top: 0;
     background-color: white;
 }
