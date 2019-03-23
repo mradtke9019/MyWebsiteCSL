@@ -10,3 +10,10 @@ $('a[href^="#"]').on('click', function (event) {
         }, 1000);
     }
 });
+
+window.onload = function () {
+    $('body').hide();
+    $('body').fadeIn(1000, function () {
+        // Animation complete
+    });
+}
