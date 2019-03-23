@@ -1,17 +1,27 @@
 .mainHead {
     margin-top: 300px;
-    margin-bottom:300px;
     padding-top:20px;
     width: 100%;
-    height: 150px;
     max-height: 60%;
     letter-spacing: 4px;
     text-align: right;
     text-transform: uppercase;
-    position:sticky;
     top:0;
     background-color:white;
 }
+
+nav {
+    letter-spacing: 4px;
+    padding-top:10px;
+    margin-top:10px;
+    margin-bottom:300px;
+    text-align: right;
+    text-transform: uppercase;
+    position:sticky;
+    top: 0;
+    background-color: white;
+}
+
 .headerClass {
     margin-left:auto;
     margin-right:auto;
