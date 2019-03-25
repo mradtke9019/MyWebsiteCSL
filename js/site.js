@@ -12,8 +12,7 @@ $('a[href^="#"]').on('click', function (event) {
 });
 
 window.onload = function () {
-    $('body').hide();
-    $('body').fadeIn(2000, function () {
+    $('#main').fadeIn(2000, function () {
         // Animation complete
     });
 }
