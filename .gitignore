@@ -3,3 +3,4 @@
 *.sqlite
 .suo
 vs
+/.vs/slnx.sqlite
